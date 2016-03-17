@@ -60,7 +60,7 @@ wget URL
 
 ... where `URL` is the URL of the file to download. It will be downloaded with a progress bar and saved to the current working directory.
 
-So, to download the first read file from this experiment you would...
+**This file is already downloaded for you! You can find it in `./data/reads/SRR3136731.fastq.gz`**. For future reference, if you wanted to download the first read file from this experiment you would...
 
 ```bash
 cd data/reads
