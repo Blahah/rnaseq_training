@@ -42,7 +42,7 @@ We need to extract the FASTA file from the archive before we can work with it. T
 
 ```bash
 cd data/reference
-gunzip Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz
+gunzip --force Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz
 cd ../..
 ```
 

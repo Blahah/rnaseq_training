@@ -36,7 +36,7 @@
 <p>The file is a FASTA file that has been <a href="https://en.wikipedia.org/wiki/Gzip">gzipped</a>, meaning it has been compressed in a format similar to a .zip file.</p>
 <p>We need to extract the FASTA file from the archive before we can work with it. To do that, run:</p>
 <pre><code class="lang-bash">cd data/reference
-gunzip Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz
+gunzip --force Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz
 cd ../..
 </code></pre>
 <h3 id="getting-the-reads">Getting the reads</h3>
