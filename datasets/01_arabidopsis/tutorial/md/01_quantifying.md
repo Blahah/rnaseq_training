@@ -222,7 +222,7 @@ Before you move on to analysing the data, you should take a look at it from the 
 # look at the list of files
 ls ./data/salmon/quant*
 # look at the first 10 lines of the results table for the first sample
-head ./data/salmon/quant_SRR3136731
+head ./data/salmon/quant_SRR3136731/quant.sf
 ```
 
 Now you're ready to merge the result data.
