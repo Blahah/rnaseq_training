@@ -19,6 +19,17 @@
 <li>quantifying transcript expression</li>
 <li>differential expression analysis</li>
 </ol>
+<h3 id="initial-setup">Initial setup</h3>
+<p>You should have a folder on your desktop called <code>RNA</code>.</p>
+<p>It contains the data for this workshop. The first thing we will do is organise the files in this directory.</p>
+<p>Open up a terminal. Now copy and paste the following commands into the terminal:</p>
+<pre><code class="lang-bash">cd ~/RNA
+mkdir analysis data plots software
+mkdir data/salmon data/metadata data/reads data/reference
+mv Arabidopsis* data/reference
+mv Salmon* software
+mv SRR* data/reads
+</code></pre>
 <h3 id="the-dataset">The dataset</h3>
 <p>We will use data from a study uploaded to ArrayExpress in February 2016. It looked at expression in <em>Arabidopsis thaliana</em> plants that had their <a href="https://en.wikipedia.org/wiki/Pyridoxine_5%27-phosphate_oxidase">PMP/PNP oxidase</a> PDX3 genes knocked out, compared to wild-type plants with the gene intact.</p>
 <p>The experiment is <a href="http://www.ebi.ac.uk/arrayexpress/experiments/E-GEOD-77428/">described by the authors</a> as follows:</p>

@@ -7,6 +7,23 @@ Specifically we will focus on two major steps:
 1. quantifying transcript expression
 2. differential expression analysis
 
+### Initial setup
+
+You should have a folder on your desktop called `RNA`.
+
+It contains the data for this workshop. The first thing we will do is organise the files in this directory.
+
+Open up a terminal. Now copy and paste the following commands into the terminal:
+
+```bash
+cd ~/RNA
+mkdir analysis data plots software
+mkdir data/salmon data/metadata data/reads data/reference
+mv Arabidopsis* data/reference
+mv Salmon* software
+mv SRR* data/reads
+```
+
 ### The dataset
 
 We will use data from a study uploaded to ArrayExpress in February 2016. It looked at expression in *Arabidopsis thaliana* plants that had their [PMP/PNP oxidase](https://en.wikipedia.org/wiki/Pyridoxine_5%27-phosphate_oxidase) PDX3 genes knocked out, compared to wild-type plants with the gene intact.
