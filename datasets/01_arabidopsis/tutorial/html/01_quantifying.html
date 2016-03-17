@@ -35,9 +35,9 @@
 <p>If the file isn&#39;t already there, move it there now.</p>
 <p>The file is a FASTA file that has been <a href="https://en.wikipedia.org/wiki/Gzip">gzipped</a>, meaning it has been compressed in a format similar to a .zip file.</p>
 <p>We need to extract the FASTA file from the archive before we can work with it. To do that, run:</p>
-<pre><code class="lang-bash">cd data/reference
+<pre><code class="lang-bash">cd ~/Desktop/RNA/data/reference
 gunzip --force Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz
-cd ../..
+cd ~/RNA
 </code></pre>
 <h3 id="getting-the-reads">Getting the reads</h3>
 <p>The experiment we&#39;ll be replicating has 9 read files - one for each sample (3 replicates and 3 conditions). For this tutorial we&#39;ll only actually process one of the read files to save time - precomputed quantification results are provided for the later steps. But we&#39;ll also see how to get and process all the data, so you&#39;ll be ready to do so with your own data in the future.</p>
@@ -47,7 +47,7 @@ cd ../..
 </code></pre>
 <p>... where <code>URL</code> is the URL of the file to download. It will be downloaded with a progress bar and saved to the current working directory.</p>
 <p><strong>This file is already downloaded for you! You can find it in <code>./data/reads/SRR3136731.fastq.gz</code></strong>. For future reference, if you wanted to download the first read file from this experiment you would...</p>
-<pre><code class="lang-bash">cd data/reads
+<pre><code class="lang-bash">cd ~/Desktop/RNA/data/reads
 wget ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/001/SRR3136731/SRR3136731.fastq.gz
 cd ../..
 </code></pre>
@@ -66,7 +66,7 @@ cd ../..
 <li>add its <code>bin</code> directory to the <code>$PATH</code>, or move it somewhere that it can be run easily from</li>
 </ul>
 <p>So...</p>
-<pre><code class="lang-bash">cd software
+<pre><code class="lang-bash">cd ~/Desktop/RNA/software
 tar xf SalmonBeta-0.6.0_DebianSqueeze.tar.gz
 mv SalmonBeta-0.6.1_DebianSqueeze/* .
 rmdir SalmonBeta-0.6.1_DebianSqueeze
@@ -143,7 +143,8 @@ done
 </ul>
 <p>Phew!</p>
 <p>Now, we <strong>run the script we just made</strong>:</p>
-<pre><code class="lang-bash">bash scripts/run_salmon.sh
+<pre><code class="lang-bash">cd ~/Desktop/RNA
+bash scripts/run_salmon.sh
 </code></pre>
 <p>Ok, Salmon should have run, and printed some progress messages to the screen.</p>
 <p>The messages may have warned you that the strand orientation of the reads was unbalanced. Salmon expects us to tell it about stranded sequencing, but in this case we didn&#39;t. It has detected that the reads were stranded and warned us - but in this case we don&#39;t care because we aren&#39;t using the strandedness information.</p>

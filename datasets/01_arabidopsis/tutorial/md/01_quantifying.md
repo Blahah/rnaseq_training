@@ -41,9 +41,9 @@ The file is a FASTA file that has been [gzipped](https://en.wikipedia.org/wiki/G
 We need to extract the FASTA file from the archive before we can work with it. To do that, run:
 
 ```bash
-cd data/reference
+cd ~/Desktop/RNA/data/reference
 gunzip --force Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz
-cd ../..
+cd ~/RNA
 ```
 
 ### Getting the reads
@@ -63,7 +63,7 @@ wget URL
 **This file is already downloaded for you! You can find it in `./data/reads/SRR3136731.fastq.gz`**. For future reference, if you wanted to download the first read file from this experiment you would...
 
 ```bash
-cd data/reads
+cd ~/Desktop/RNA/data/reads
 wget ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/001/SRR3136731/SRR3136731.fastq.gz
 cd ../..
 ```
@@ -97,7 +97,7 @@ To get it ready to use we need to do the following:
 So...
 
 ```bash
-cd software
+cd ~/Desktop/RNA/software
 tar xf SalmonBeta-0.6.0_DebianSqueeze.tar.gz
 mv SalmonBeta-0.6.1_DebianSqueeze/* .
 rmdir SalmonBeta-0.6.1_DebianSqueeze
@@ -205,6 +205,7 @@ Phew!
 Now, we **run the script we just made**:
 
 ```bash
+cd ~/Desktop/RNA
 bash scripts/run_salmon.sh
 ```
 
