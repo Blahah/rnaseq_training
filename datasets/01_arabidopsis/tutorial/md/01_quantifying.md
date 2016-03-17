@@ -170,7 +170,7 @@ To run Salmon, we will use a bash script. Create a new file in `./scripts` calle
 SAMPLES=(SRR3136731)
 
 for id in ${SAMPLES[@]}; do
-  ./bin/salmon quant \
+  ./software/bin/salmon quant \
     -p 6 \
     -i ./data/index \
     -l U \
