@@ -31,7 +31,9 @@ wget http://www.ebi.ac.uk/arrayexpress/files/E-GEOD-77428/E-GEOD-77428.sdrf.txt
 
 ### Perparing the data
 
-An R script is provided at `./analysis/01_merge_data.R`. It:
+An R script is provided [here](http://rik.smith-unna.com/rnaseq_training/datasets/01_arabidopsis/analysis/01_merge_data.R). Right-click the link and save it as `~/Desktop/RNA/analysis/01_merge_data.R`
+
+It:
 
 - loads the expression data and the experiment metadata
 - reorganises the expression data into one table per data type

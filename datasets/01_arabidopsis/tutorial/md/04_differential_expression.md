@@ -5,7 +5,9 @@ Finally, we come to the differential expression analysis step.
 This step can be fairly simple - and in this example we will make it as simple as possible. If there is time, we can explore more detailed aspects of the analysis.
 
 
-An R script is provided at `./analysis/03_differential_expression.R`. It:
+An R script is provided [here](http://rik.smith-unna.com/rnaseq_training/datasets/01_arabidopsis/analysis/03_differential_expression.R). Right-click the link and save it as `~/Desktop/RNA/analysis/03_differential_expression.R`
+
+It:
 
 - loads the merged data tab les we created in the last step
 - produces a plot that enables comparing the expression distribution between samples

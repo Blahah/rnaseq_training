@@ -4,7 +4,9 @@ RNA-seq is a complex set of protocols, and there are many potential sources of b
 
 In this step, we will perform some basic quality control analysis of the expression quantification results.
 
-An R script is provided at `./analysis/02_quality_control.R`. It:
+An R script is provided [here](http://rik.smith-unna.com/rnaseq_training/datasets/01_arabidopsis/analysis/02_quality_control.R). Right-click the link and save it as `~/Desktop/RNA/analysis/02_quality_control.R`
+
+It:
 
 - loads the merged data tables we created in the last step
 - produces a plot that enables comparing the expression distribution between samples
