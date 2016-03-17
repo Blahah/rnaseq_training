@@ -164,7 +164,14 @@ The quantification must be run separately for each sample, and it produces a sep
 
 Later we will see how to combine the information from all samples.
 
-To run Salmon, we will use a bash script. Create a new file in `./scripts` called `run_salmon.sh`, with the contents:
+To run Salmon, we will use a bash script. Create a new file in `./scripts` called `run_salmon.sh`.
+
+```bash
+mkdir scripts
+nano scripts/run_salmon.sh
+```
+
+Copy and paste the following into the script:
 
 ```
 SAMPLES=(SRR3136731)
@@ -178,6 +185,8 @@ for id in ${SAMPLES[@]}; do
     -o ./data/salmon/quant_${id}
 done
 ```
+
+Now save the file (`ctrl o`) and exit (`ctrl x`).
 
 This code runs Salmon for each sample in a list of samples. This might look alien to you, so let's break it down:
 

@@ -114,7 +114,11 @@ cd ..
 <p>Now we will perform the quantification step. It takes the reads and the transcript sequences as input, and outputs a table containing expression estimate information for each transcript in the reference.</p>
 <p>The quantification must be run separately for each sample, and it produces a separate output directory for each sample.</p>
 <p>Later we will see how to combine the information from all samples.</p>
-<p>To run Salmon, we will use a bash script. Create a new file in <code>./scripts</code> called <code>run_salmon.sh</code>, with the contents:</p>
+<p>To run Salmon, we will use a bash script. Create a new file in <code>./scripts</code> called <code>run_salmon.sh</code>.</p>
+<pre><code class="lang-bash">mkdir scripts
+nano scripts/run_salmon.sh
+</code></pre>
+<p>Copy and paste the following into the script:</p>
 <pre><code>SAMPLES=(SRR3136731)
 
 for id in ${SAMPLES[@]}; do
@@ -125,7 +129,8 @@ for id in ${SAMPLES[@]}; do
     -r &lt;(gunzip -c ./data/reads/${id}.fastq.gz) \
     -o ./data/salmon/quant_${id}
 done
-</code></pre><p>This code runs Salmon for each sample in a list of samples. This might look alien to you, so let&#39;s break it down:</p>
+</code></pre><p>Now save the file (<code>ctrl o</code>) and exit (<code>ctrl x</code>).</p>
+<p>This code runs Salmon for each sample in a list of samples. This might look alien to you, so let&#39;s break it down:</p>
 <ul>
 <li><code>SAMPLES=(SRR3136731)</code> - make a bash variable containing an array, and put a single identifier in the array. If we were analysing more samples we would list them all here, separated by spaces. e.g.: <code>SAMPLES=(SRR3136731 SRR3136732 SRR3136733 SRR3136734 SRR3136735 SRR3136736 SRR3136737 SRR3136738 SRR3136739)</code></li>
 <li><code>for id in ${SAMPLES[@]}; do</code> loop over the sample identifiers, making <code>id</code> refer to the current identifier inside the loop</li>
