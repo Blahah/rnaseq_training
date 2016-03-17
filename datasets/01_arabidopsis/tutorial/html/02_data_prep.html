@@ -39,7 +39,8 @@ wget http://www.ebi.ac.uk/arrayexpress/files/E-GEOD-77428/E-GEOD-77428.sdrf.txt
 <p>Open the script <code>./analysis/01_merge_data.R</code> in your RStudio. The easiest way to do this is to look at the <code>Files</code> tab in the bottom-right pane, and then click the <code>analysis</code> directory, followed by the <code>01_merge_data.R</code> script.</p>
 <p><strong>Read through the script comments and code</strong>. Execute the code one piece at a time, making sure each piece runs successfully and thinking about what it does.</p>
 <p>When you&#39;ve finished go to the terminal and run:</p>
-<pre><code class="lang-bash">ls ./data/merged
+<pre><code class="lang-bash">cd ~/Desktop/RNA
+ls ./data/merged
 </code></pre>
 <p>You should see three new files: <code>tpm.csv</code>, <code>est_counts.csv</code> and <code>eff_length.csv</code>. These are the files we will use in the next step.</p>
 

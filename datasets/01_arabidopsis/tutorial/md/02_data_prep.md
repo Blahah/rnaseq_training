@@ -45,6 +45,7 @@ Open the script `./analysis/01_merge_data.R` in your RStudio. The easiest way to
 When you've finished go to the terminal and run:
 
 ```bash
+cd ~/Desktop/RNA
 ls ./data/merged
 ```
 
