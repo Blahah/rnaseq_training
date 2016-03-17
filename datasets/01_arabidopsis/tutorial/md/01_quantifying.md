@@ -193,6 +193,12 @@ This code runs Salmon for each sample in a list of samples. This might look alie
 
 Phew!
 
+Now, we **run the script we just made**:
+
+```bash
+bash scripts/run_salmon.sh
+```
+
 Ok, Salmon should have run, and printed some progress messages to the screen.
 
 The messages may have warned you that the strand orientation of the reads was unbalanced. Salmon expects us to tell it about stranded sequencing, but in this case we didn't. It has detected that the reads were stranded and warned us - but in this case we don't care because we aren't using the strandedness information.
