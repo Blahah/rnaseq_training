@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <title>slidewinder community docs</title>
+  <link rel="stylesheet" type="text/css" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <section class="content">
+
+        <p><a href="index.html">Back to table of contents</a></p>
+        <h3 id="preparing-expression-quantification-data-for-analysis">Preparing expression quantification data for analysis</h3>
+<p>So far we&#39;ve performed expression quantification for a single sample using Salmon. You&#39;ve also been provided with the output for the other samples.</p>
+<p>At the moment the output for each sample is in a separate directory. Also, the samples are named according to their ENA ID rather than their condition and replicate. We will solve both of these problems now.</p>
+<p>From this point onward we will be using RStudio. Open RStudio now.</p>
+<h3 id="creating-a-project">Creating a project</h3>
+<p>It&#39;s important that we keep our files clearly organised so we can find them later. We&#39;ll do this using an RStudio project.</p>
+<p>Select <code>File &gt; New Project...</code> from the menu.</p>
+<p><img src="../assets/rstudio_new_project.png" alt=""></p>
+<p>Next, choose <code>Existing Directory</code>, and then select the directory where these materials are located.</p>
+<h3 id="perparing-the-data">Perparing the data</h3>
+<p>An R script is provided at <code>./analysis/01_merge_data.R</code>. It:</p>
+<ul>
+<li>loads the expression data and the experiment metadata</li>
+<li>reorganises the expression data into one table per data type</li>
+<li>labels the columns meaningfully (by condition and replicate)</li>
+<li>saves the new data tables to a new directory <code>./data/merged</code></li>
+</ul>
+<p>Open the script <code>./analysis/01_merge_data.R</code> in your RStudio. The easiest way to do this is to look at the <code>Files</code> tab in the bottom-right pane, and then click the <code>analysis</code> directory, followed by the <code>01_merge_data.R</code> script.</p>
+<p><strong>Read through the script comments and code</strong>. Execute the code one piece at a time, making sure each piece runs successfully and thinking about what it does.</p>
+<p>When you&#39;ve finished go to the terminal and run:</p>
+<pre><code class="lang-bash">ls ./data/merged
+</code></pre>
+<p>You should see three new files: <code>tpm.csv</code>, <code>est_counts.csv</code> and <code>eff_length.csv</code>. These are the files we will use in the next step.</p>
+
+        <div class="navlinks">
+          <a class="nextp button" href="03_quality_control.html">OK, next! &raquo;</a>
+            <a class="lastp navlink" href="01_quantifying.html">&laquo; back</a>
+        </div>
+    </section>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

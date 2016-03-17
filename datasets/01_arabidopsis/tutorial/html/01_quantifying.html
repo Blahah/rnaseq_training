@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+  <title>slidewinder community docs</title>
+  <link rel="stylesheet" type="text/css" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <section class="content">
+
+        <p><a href="index.html">Back to table of contents</a></p>
+        <h3 id="quantifying-expression-overview">Quantifying expression - overview</h3>
+<p>Expression quantification involves comparing the sequenced reads to known transcript sequences. We therefore will need to download both the read data and a suitable set of reference transcripts.</p>
+<h3 id="choosing-a-reference">Choosing a reference</h3>
+<p>In the case of arabidopsis there is only one genome assembly project that provides the standard reference sequences (although competing projects are now underway). The TAIR resource provides genome assemblies and annotations for arabidopsis. The current version of TAIR is TAIR10 - we want the cDNA sequences from this annotation.</p>
+<p>We will get this data from Ensembl Plants (<a href="http://plants.ensembl.org/index.html">http://plants.ensembl.org/index.html</a>), which is a high-quality resource for plant genomics, providing reference sequences, annotation, functional information and population and comparative genomics information.</p>
+<blockquote>
+<p><strong>NOTE</strong> - the next few instructions cover how to download the data from Ensembl. You can do this if you&#39;d like, but if your internet connection is slow you can use the pre-downloaded reference file in the <code>./data</code> directory. Skip to the next section to see how to use it.</p>
+</blockquote>
+<p>Arabidopsis is so important to plant science that it&#39;s the first species highlighted on the Ensembl Plants homepage!</p>
+<p><img src="../assets/ensembl_plants_homepage.png" alt=""></p>
+<p>If you click through to the Arabidopsis page you have a lot of different data types available to download.</p>
+<p><img src="../assets/ensembl_plants_ath.png" alt=""></p>
+<p>We&#39;re looking for reference transcript sequences, which are under the <strong>Gene annotation</strong> section. Click the <strong>FASTA</strong> link to go to the Ensembl Plants FTP server where the data can be downloaded.</p>
+<p><img src="../assets/ensembl_ath_ftp.png" alt=""></p>
+<p>We want <strong>cDNA</strong>, which is a DNA representation of mRNA, and within the cDNA directory we want the <code>Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz</code> file.</p>
+<p><img src="../assets/ensembl_ath_cdna.png" alt=""></p>
+<h3 id="preparing-the-reference">Preparing the reference</h3>
+<p>The reference file should be saved in <code>./data/reference/</code>. Check by running the following command in your terminal:</p>
+<pre><code class="lang-bash">ls data/reference
+</code></pre>
+<p>If the file isn&#39;t already there, move it there now.</p>
+<p>The file is a FASTA file that has been <a href="https://en.wikipedia.org/wiki/Gzip">gzipped</a>, meaning it has been compressed in a format similar to a .zip file.</p>
+<p>We need to extract the FASTA file from the archive before we can work with it. To do that, run:</p>
+<pre><code class="lang-bash">cd data/reference
+gunzip Arabidopsis_thaliana.TAIR10.30.cdna.all.fa.gz
+cd ../..
+</code></pre>
+<h3 id="getting-the-reads">Getting the reads</h3>
+<p>The experiment we&#39;ll be replicating has 9 read files - one for each sample (3 replicates and 3 conditions). For this tutorial we&#39;ll only actually process one of the read files to save time - precomputed quantification results are provided for the later steps. But we&#39;ll also see how to get and process all the data, so you&#39;ll be ready to do so with your own data in the future.</p>
+<p>The European Nucleotide Archive provides reads in gzipped FASTQ format on an FTP server. There are a lot of options for downloading these kind of files, but we&#39;ll use one of the simplest: <code>wget</code>.</p>
+<p>To download any file with wget, you just run:</p>
+<pre><code class="lang-bash">wget URL
+</code></pre>
+<p>... where <code>URL</code> is the URL of the file to download. It will be downloaded with a progress bar and saved to the current working directory.</p>
+<p>So, to download the first read file from this experiment you would...</p>
+<pre><code class="lang-bash">cd data/reads
+wget ftp.sra.ebi.ac.uk/vol1/fastq/SRR313/001/SRR3136731/SRR3136731.fastq.gz
+cd ../..
+</code></pre>
+<p>Unlike the FASTA transcript file we downloaded, we don&#39;t need to <code>gunzip</code> this one. That&#39;s because we&#39;ll use a clever trick to do this on the fly as we run Salmon, the tool we&#39;re using for quantifying expression.</p>
+<h3 id="installing-salmon">Installing Salmon</h3>
+<p>Salmon is a very fast, very accurate tool for quantifying transcript expression using RNA-seq data.</p>
+<p>Here we&#39;ll go over the process for downloading and installing Salmon, because it&#39;s a very useful skill to have in bioinformatics.</p>
+<p>Salmon, like many tools, provides a precompiled binary distribution. This means we can just download it, unpack it and run it. This is much quicker than the alternative which is to download the source code and compile it from scratch.</p>
+<p>Normally we&#39;d browse to the <a href="https://github.com/COMBINE-lab/salmon">Salmon website or Github repository</a>, and then look at the releases tab. From there we&#39;d pick the latest release and then choose the binary download that matched our system (in this case, Linux x64).</p>
+<p>The download link for version <code>0.6.0</code> is:</p>
+<pre><code>https://github.com/COMBINE-lab/salmon/releases/download/v0.6.0/SalmonBeta-0.6.0_DebianSqueeze.tar.gz
+</code></pre><p><strong>The file is already downloaded for you</strong> (in case of internet outage) - you can find it at <code>./software/SalmonBeta-0.6.0_DebianSqueeze.tar.gz</code>.</p>
+<p>To get it ready to use we need to do the following:</p>
+<ul>
+<li>extract the <code>.tar.gz</code> file</li>
+<li>add its <code>bin</code> directory to the <code>$PATH</code>, or move it somewhere that it can be run easily from</li>
+</ul>
+<p>So...</p>
+<pre><code class="lang-bash">cd software
+tar xf SalmonBeta-0.6.0_DebianSqueeze.tar.gz
+mv SalmonBeta-0.6.1_DebianSqueeze/* .
+rmdir SalmonBeta-0.6.1_DebianSqueeze
+cd ..
+</code></pre>
+<p>You should check that you can run Salmon by running:</p>
+<pre><code class="lang-bash">./software/bin/salmon --help
+</code></pre>
+<p>You should see something like...</p>
+<pre><code>Allowed Options:
+  -v [ --version ]      print version string
+  --no-version-check    don&#39;t check with the server to see if this is the
+                        latest version
+  -h [ --help ]         produce help message
+
+    Salmon v0.6.0
+    ===============
+
+    Please invoke salmon with one of the following commands {index, quant, swim}.
+    For more information on the options for these particular methods, use the -h
+    flag along with the method name.  For example:
+
+    salmon index -h
+
+    will give you detailed help information about the index command.
+</code></pre><h3 id="indexing-the-reference">Indexing the reference</h3>
+<p>Before the quantification can be run, Salmon first needs to index the reference transcriptome. In this step, Salmon creates an efficient data structure that allows very fast determination of candidate transcripts where each read might originate.</p>
+<p>To create the index, run:</p>
+<pre><code class="lang-bash">./software/salmon index \
+  --transcripts ./data/reference/Arabidopsis_thaliana.TAIR10.30.cdna.all.fa \
+  --index ./data/index \
+  --type quasi \
+  -k 31
+</code></pre>
+<p>Here&#39;s what we just told Salmon to do:</p>
+<ul>
+<li><code>salmon index</code> -- run the indexing step</li>
+<li><code>--transcripts</code> -- where to find the input transcript FASTA file</li>
+<li><code>--index</code> -- where to put the output index directory</li>
+<li><code>--type quasi</code> -- use the quasi-mapping algorithm</li>
+<li><code>-k 31</code> -- use a word size of 31 bases in the index</li>
+</ul>
+<p>You should now see that Salmon has created an index directory at <code>./data/index</code></p>
+<h3 id="quantifying-expression">Quantifying expression</h3>
+<p>Now we will perform the quantification step. It takes the reads and the transcript sequences as input, and outputs a table containing expression estimate information for each transcript in the reference.</p>
+<p>The quantification must be run separately for each sample, and it produces a separate output directory for each sample.</p>
+<p>Later we will see how to combine the information from all samples.</p>
+<p>To run Salmon, we will use a bash script. Create a new file in <code>./scripts</code> called <code>run_salmon.sh</code>, with the contents:</p>
+<pre><code>SAMPLES=(SRR3136731)
+
+for id in ${SAMPLES[@]}; do
+  ./bin/salmon quant \
+    -p 6 \
+    -i ./data/index \
+    -l U \
+    -r &lt;(gzcat ./data/reads/${id}.fastq.gz) \
+    -o ./data/salmon/quant_${id}
+; done
+</code></pre><p>This code runs Salmon for each sample in a list of samples. This might look alien to you, so let&#39;s break it down:</p>
+<ul>
+<li><code>SAMPLES=(SRR3136731)</code> - make a bash variable containing an array, and put a single identifier in the array. If we were analysing more samples we would list them all here, separated by spaces. e.g.: <code>SAMPLES=(SRR3136731 SRR3136732 SRR3136733 SRR3136734 SRR3136735 SRR3136736 SRR3136737 SRR3136738 SRR3136739)</code></li>
+<li><code>for id in ${SAMPLES[@]}; do</code> loop over the sample identifiers, making <code>id</code> refer to the current identifier inside the loop</li>
+<li><code>./bin/salmon quant \</code> run Salmon&#39;s <code>quant</code> step. The <code>\</code> tells bash that the command continues on the next line.</li>
+<li><code>-p 6</code> use 6 threads</li>
+<li><code>-i ./data/index</code> where to find the index</li>
+<li><code>-l U</code> tells Salmon these are unpaired reads</li>
+<li><code>-r &lt;(gunzip -c ./data/reads/${id}.fastq.gz)</code> use these unpaired reads. <code>&lt;(command)</code> runs a command in a separate process and sends the output as an input stream to Salmon - in this case we use it to <code>gunzip</code> the reads on the fly. <code>${id}</code> inserts the sample identifier currently being processed into the command.</li>
+<li><code>-o ./data/salmon/quant_${id}</code> where to write out the results</li>
+</ul>
+<p>Phew!</p>
+<p>Ok, Salmon should have run, and printed some progress messages to the screen.</p>
+<p>The messages may have warned you that the strand orientation of the reads was unbalanced. Salmon expects us to tell it about stranded sequencing, but in this case we didn&#39;t. It has detected that the reads were stranded and warned us - but in this case we don&#39;t care because we aren&#39;t using the strandedness information.</p>
+<h3 id="inspecting-the-results">Inspecting the results</h3>
+<p>Congratulations! You&#39;ve just quantified expression from RNA-seq data.</p>
+<p>Before you move on to analysing the data, you should take a look at it from the command-line to see if it seems to have worked OK.</p>
+<pre><code class="lang-bash"># look at the list of files
+ls ./data/salmon/quant*
+# look at the first 10 lines of the results table for the first sample
+head ./data/salmon/quant_SRR3136731
+</code></pre>
+<p>Now you&#39;re ready to merge the result data.</p>
+
+        <div class="navlinks">
+          <a class="nextp button" href="02_data_prep.html">OK, next! &raquo;</a>
+            <a class="lastp navlink" href="00_index.html">&laquo; back</a>
+        </div>
+    </section>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

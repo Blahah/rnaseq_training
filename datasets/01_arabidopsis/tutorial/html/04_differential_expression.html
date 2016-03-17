@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>slidewinder community docs</title>
+  <link rel="stylesheet" type="text/css" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <section class="content">
+
+        <p><a href="index.html">Back to table of contents</a></p>
+        <h3 id="differential-expression-analysis">Differential expression analysis</h3>
+<p>Finally, we come to the differential expression analysis step.</p>
+<p>This step can be fairly simple - and in this example we will make it as simple as possible. If there is time, we can explore more detailed aspects of the analysis.</p>
+<p>An R script is provided at <code>./analysis/03_differential_expression.R</code>. It:</p>
+<ul>
+<li>loads the merged data tab les we created in the last step</li>
+<li>produces a plot that enables comparing the expression distribution between samples</li>
+<li>produces a plot that helps inspect the within- and between-condition correlation of expression estimates</li>
+<li>saves both plots</li>
+</ul>
+<p>Open the script <code>./analysis/03_differential_expression.R</code> in your RStudio. The easiest way to do this is to look at the <code>Files</code> tab in the bottom-right pane, and then click the <code>analysis</code> directory, followed by the <code>03_differential_expression.R</code> script.</p>
+<p><strong>Read through the script comments and code</strong>. Execute the code one piece at a time, making sure each piece runs successfully and thinking about what it does.</p>
+<p><strong>Once you&#39;ve reached the end of this script</strong> you should congratulate yourself! You&#39;ve just successfully completed a differential expression experiment!</p>
+<p>However, this was just a taste of how to perform a full differential expression analysis. To explore what else you should think about, the following resources provide a great deal more detail:</p>
+<ul>
+<li><a href="http://www-huber.embl.de/users/klaus/Teaching/DESeq2Predoc2014.html">http://www-huber.embl.de/users/klaus/Teaching/DESeq2Predoc2014.html</a></li>
+<li><a href="http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.pdf">http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.pdf</a></li>
+</ul>
+
+        <div class="navlinks">
+        </div>
+    </section>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

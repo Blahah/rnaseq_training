@@ -1,0 +1,7 @@
+*tar.gz
+data
+*pdf
+.Rproj.user
+.RData
+.DS_Store
+*.Rproj
