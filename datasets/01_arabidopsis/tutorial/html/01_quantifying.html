@@ -122,9 +122,9 @@ for id in ${SAMPLES[@]}; do
     -p 6 \
     -i ./data/index \
     -l U \
-    -r &lt;(gzcat ./data/reads/${id}.fastq.gz) \
+    -r &lt;(gunzip -c ./data/reads/${id}.fastq.gz) \
     -o ./data/salmon/quant_${id}
-; done
+done
 </code></pre><p>This code runs Salmon for each sample in a list of samples. This might look alien to you, so let&#39;s break it down:</p>
 <ul>
 <li><code>SAMPLES=(SRR3136731)</code> - make a bash variable containing an array, and put a single identifier in the array. If we were analysing more samples we would list them all here, separated by spaces. e.g.: <code>SAMPLES=(SRR3136731 SRR3136732 SRR3136733 SRR3136734 SRR3136735 SRR3136736 SRR3136737 SRR3136738 SRR3136739)</code></li>

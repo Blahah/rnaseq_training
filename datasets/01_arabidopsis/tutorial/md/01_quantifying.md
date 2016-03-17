@@ -174,9 +174,9 @@ for id in ${SAMPLES[@]}; do
     -p 6 \
     -i ./data/index \
     -l U \
-    -r <(gzcat ./data/reads/${id}.fastq.gz) \
+    -r <(gunzip -c ./data/reads/${id}.fastq.gz) \
     -o ./data/salmon/quant_${id}
-; done
+done
 ```
 
 This code runs Salmon for each sample in a list of samples. This might look alien to you, so let's break it down:
