@@ -18,7 +18,7 @@ Next, choose `Existing Directory`, and then select the `RNA`directory on the des
 
 ### Obtaining the metadata
 
-We will need some metadata about tht experiment in this step.
+We will need some metadata about the experiment in this step.
 
 Open a terminal and run:
 
