@@ -139,7 +139,7 @@ Before the quantification can be run, Salmon first needs to index the reference 
 To create the index, run:
 
 ```bash
-./software/salmon index \
+./software/bin/salmon index \
   --transcripts ./data/reference/Arabidopsis_thaliana.TAIR10.30.cdna.all.fa \
   --index ./data/index \
   --type quasi \

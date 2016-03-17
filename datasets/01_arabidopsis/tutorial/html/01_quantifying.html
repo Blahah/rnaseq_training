@@ -95,7 +95,7 @@ cd ..
 </code></pre><h3 id="indexing-the-reference">Indexing the reference</h3>
 <p>Before the quantification can be run, Salmon first needs to index the reference transcriptome. In this step, Salmon creates an efficient data structure that allows very fast determination of candidate transcripts where each read might originate.</p>
 <p>To create the index, run:</p>
-<pre><code class="lang-bash">./software/salmon index \
+<pre><code class="lang-bash">./software/bin/salmon index \
   --transcripts ./data/reference/Arabidopsis_thaliana.TAIR10.30.cdna.all.fa \
   --index ./data/index \
   --type quasi \
