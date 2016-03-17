@@ -40,6 +40,16 @@ for (file in files) {
   rm(df)
 }
 
+# take a look at the data you've loaded...
+# there should be 6 columns (otherwise something has gone wrong)
+head(tpm)
+summary(tpm)
+
+# notice that the columns are not named, so we can't tell which
+# sample is which!
+# we'll fix that now by loading the sample metadata
+# and using it to annotate the data frames we've made
+
 # match up the filenames with the sample and replicate information
 # load the sample information
 samples <- read.table('data/metadata/E-GEOD-77428.sdrf.txt',
@@ -57,7 +67,11 @@ colnames(tpm) <- sample_names
 colnames(est_counts) <- sample_names
 colnames(eff_length) <- sample_names
 
+# take a look at the named data
+head(tpm)
+
 # and finally, we save the merged data
+dir.create('data/merged', showWarnings=FALSE)
 write.table(tpm, 'data/merged/tpm.tsv', sep="\t")
 write.table(est_counts, 'data/merged/est_counts.tsv', sep="\t")
 write.table(eff_length, 'data/merged/eff_length.tsv', sep="\t")

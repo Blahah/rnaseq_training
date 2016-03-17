@@ -7,8 +7,12 @@
 est_counts <- round(read.table('data/merged/est_counts.tsv'))
 
 # load the DESeq2 package we will use for differential expression testing
-source("https://bioconductor.org/biocLite.R")
-biocLite("DESeq2")
+if (!require(DESeq2)) {
+  # in case DESeq2 isn't installed, we will install it
+  source("https://bioconductor.org/biocLite.R")
+  biocLite("DESeq2")
+}
+library(DESeq2)
 
 # create a data frame describing the condition for each experiment
 split_names <- strsplit(colnames(est_counts), '.rep.')
