@@ -14,7 +14,7 @@ Select `File > New Project...` from the menu.
 
 ![](../assets/rstudio_new_project.png)
 
-Next, choose `Existing Directory`, and then select the `RNA`directory on the desktop.
+Next, choose `Existing Directory`, and then select the `RNA` directory on the desktop.
 
 ### Obtaining the metadata
 
@@ -23,7 +23,7 @@ We will need some metadata about the experiment in this step.
 Open a terminal and run:
 
 ```
-cd ~/RNA/data
+cd ~/Desktop/RNA/data
 mkdir -p metadata
 cd metadata
 wget http://www.ebi.ac.uk/arrayexpress/files/E-GEOD-77428/E-GEOD-77428.sdrf.txt

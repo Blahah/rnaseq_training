@@ -225,4 +225,27 @@ ls ./data/salmon/quant*
 head ./data/salmon/quant_SRR3136731/quant.sf
 ```
 
+You should see something like...
+
+```
+Name	Length	EffectiveLength	TPM	NumReads
+ATMG00010.1	462	261.577	0.203453	1
+ATMG00030.1	324	125.61	59.3157	140
+ATMG00040.1	948	747.567	0	0
+ATMG00050.1	396	195.748	0.271874	1
+ATMG00060.1	542	341.567	0.311615	2
+ATMG00070.1	573	372.567	1.99981	14
+ATMG00080.1	540	339.567	1.2538	8
+ATMG00090.1	1671	1470.57	0.470461	13
+ATMG00110.1	621	420.567	0.253081	2
+```
+
+This is the first ten lines of the expression quantification result table for this sample. It contains five columns:
+
+- `Name` - the name of the transcript
+- `Length` - the length of the transcript in bases
+- `EffectiveLength` - the number of possible start sites in a transcript that could have generated a fragment
+- `TPM` - **t**ranscripts **p**er **m**illion - if there were a million transcripts, how many would be copies of this transcript?
+- `NumReads` - the number of reads assigned to this transcript
+
 Now you're ready to merge the result data.
