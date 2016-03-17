@@ -16,7 +16,7 @@ It contains the data for this workshop. The first thing we will do is organise t
 Open up a terminal. Now copy and paste the following commands into the terminal:
 
 ```bash
-cd ~/RNA
+cd ~/Desktop/RNA
 mkdir analysis data plots software
 mkdir data/salmon data/metadata data/reads data/reference
 mv Arabidopsis* data/reference
