@@ -20,8 +20,15 @@
 <p>It&#39;s important that we keep our files clearly organised so we can find them later. We&#39;ll do this using an RStudio project.</p>
 <p>Select <code>File &gt; New Project...</code> from the menu.</p>
 <p><img src="../assets/rstudio_new_project.png" alt=""></p>
-<p>Next, choose <code>Existing Directory</code>, and then select the directory where these materials are located.</p>
-<h3 id="perparing-the-data">Perparing the data</h3>
+<p>Next, choose <code>Existing Directory</code>, and then select the <code>RNA</code>directory on the desktop.</p>
+<h3 id="obtaining-the-metadata">Obtaining the metadata</h3>
+<p>We will need some metadata about tht experiment in this step.</p>
+<p>Open a terminal and run:</p>
+<pre><code>cd ~/RNA/data
+mkdir -p metadata
+cd metadata
+wget http://www.ebi.ac.uk/arrayexpress/files/E-GEOD-77428/E-GEOD-77428.sdrf.txt
+</code></pre><h3 id="perparing-the-data">Perparing the data</h3>
 <p>An R script is provided at <code>./analysis/01_merge_data.R</code>. It:</p>
 <ul>
 <li>loads the expression data and the experiment metadata</li>
